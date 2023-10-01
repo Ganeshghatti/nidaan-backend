@@ -62,13 +62,16 @@ app.post('/webhook', express.raw({type: 'application/json'}), (request, response
   }
 
   // Handle the event
-  console.log(`Unhandled event type ${event.type}`);
+  switch (event.type) {
+    case 'checkout.session.completed':
+      const checkoutSessionCompleted = event.data.object;
+      // Then define and call a function to handle the event checkout.session.completed
+      break;
+    // ... handle other event types
+    default:
+      console.log(`Unhandled event type ${event.type}`);
+  }
 
   // Return a 200 response to acknowledge receipt of the event
   response.send();
 });
-
-    // Return a 200 response to acknowledge receipt of the event
-    response.send();
-  }
-);
