@@ -34,27 +34,27 @@ exports.chat = async (req, res, next) => {
   }
 };
 exports.chathistory = async (req, res, next) => {
-    const userdata = req.body;
-    console.log("userData:", userdata);
-    console.log("userData:", userdata.user.email);
+  const userdata = req.body;
+  console.log("userData:", userdata);
+  console.log("userData:", userdata.user.email);
 
-    try {
-      const existingUser = await users.findOne({
-        email: userdata.user.email,
-      });
-  
-      if (!existingUser) {
-        console.log("User not found");
-        return res.status(404).json({ message: "User not found" });
-      }
+  try {
+    const existingUser = await users.findOne({
+      email: userdata.user.email,
+    });
 
-      console.log("chat data:", existingUser.chats);
-    
-      res.status(200).json({ chats: existingUser.chats });
-    } catch (error) {
-      console.error("Error reading chat data:", error.message);
-      res
-        .status(500)
-        .json({ message: "Failed to read chat data", error: error.message });
+    if (!existingUser) {
+      console.log("User not found");
+      return res.status(404).json({ message: "User not found" });
     }
-  };
+
+    console.log("chat data:", existingUser.chats);
+
+    res.status(200).json({ chats: existingUser.chats });
+  } catch (error) {
+    console.error("Error reading chat data:", error.message);
+    res
+      .status(500)
+      .json({ message: "Failed to read chat data", error: error.message });
+  }
+};

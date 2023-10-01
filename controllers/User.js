@@ -74,6 +74,7 @@ exports.login = async (req, res, next) => {
     res.status(500).json("Failed to get user");
   }
 };
+
 exports.gauth = async (req, res, next) => {
   const userdata = req.body;
   console.log(userdata);

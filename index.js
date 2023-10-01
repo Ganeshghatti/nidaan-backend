@@ -4,6 +4,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const userroutes = require("./routes/User");
 const chatroutes = require("./routes/Chat");
+const paymentroutes= require("./routes/Payment");
 require("dotenv").config();
 
 const universalAnalytics = require("universal-analytics");
@@ -15,6 +16,7 @@ app.use(bodyParser.json());
 app.use(cors());
 app.use(userroutes);
 app.use(chatroutes);
+app.use(paymentroutes)
 
 connectdatabase();
 const PORT = process.env.PORT;
