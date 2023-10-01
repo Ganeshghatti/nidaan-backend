@@ -50,6 +50,8 @@ exports.payment = async (req, res, next) => {
 const endpointSecret = "whsec_0fe03ac1006f63c9d8f103e89abd4a7240841e5a9b6846fc4600540727e770e7";
 
 app.post('/webhook', express.raw({type: 'application/json'}), (request, response) => {
+  console.log("object")
+
   const sig = request.headers['stripe-signature'];
 
   let event;
