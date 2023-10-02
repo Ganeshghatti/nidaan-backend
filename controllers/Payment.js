@@ -55,7 +55,6 @@ app.post(
   express.raw({ type: "application/json" }),
   (request, response) => {
     const sig = request.headers["stripe-signature"];
-
     let event;
 
     try {
