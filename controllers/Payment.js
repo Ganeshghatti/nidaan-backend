@@ -34,8 +34,8 @@ exports.payment = async (req, res, next) => {
     // Commented out session creation
 
     const session = await stripe.checkout.sessions.create({
-      success_url: "http://localhost:3000/success",
-      cancel_url: "http://localhost:3000/failure",
+      success_url: "https://nidaantech.netlify.app/success",
+      cancel_url: "https://nidaantech.netlify.app/failure",
       line_items: [{ price: "price_1NwWhGSHxOErLjIv0fFc9t6J", quantity: 2 }],
       mode: "payment",
     });
@@ -47,42 +47,34 @@ exports.payment = async (req, res, next) => {
   }
 };
 
-const endpointSecret = "whsec_0fe03ac1006f63c9d8f103e89abd4a7240841e5a9b6846fc4600540727e770e7";
+// const endpointSecret =
+//   "whsec_0fe03ac1006f63c9d8f103e89abd4a7240841e5a9b6846fc4600540727e770e7";
 
-<<<<<<< HEAD
-app.post(
-  "/webhook",
-  express.raw({ type: "application/json" }),
-  (request, response) => {
-    const sig = request.headers["stripe-signature"];
-    let event;
-=======
-app.post('/webhook', express.raw({type: 'application/json'}), (request, response) => {
-  console.log("object")
+// app.post(
+//   "/webhook",
+//   express.raw({ type: "application/json" }),
+//   (request, response) => {
+//     console.log("object");
 
-  const sig = request.headers['stripe-signature'];
->>>>>>> 9c54a10752e181248a2fe1af87458756e02151a2
+//     const sig = request.headers["stripe-signature"];
 
-  let event;
+//     let event;
 
-  try {
-    event = stripe.webhooks.constructEvent(request.body, sig, endpointSecret);
-  } catch (err) {
-    response.status(400).send(`Webhook Error: ${err.message}`);
-    return;
-  }
+//     try {
+//       event = stripe.webhooks.constructEvent(request.body, sig, endpointSecret);
+//     } catch (err) {
+//       response.status(400).send(`Webhook Error: ${err.message}`);
+//       return;
+//     }
 
-  // Handle the event
-  switch (event.type) {
-    case 'checkout.session.completed':
-      const checkoutSessionCompleted = event.data.object;
-      // Then define and call a function to handle the event checkout.session.completed
-      break;
-    // ... handle other event types
-    default:
-      console.log(`Unhandled event type ${event.type}`);
-  }
+//     switch (event.type) {
+//       case "checkout.session.completed":
+//         const checkoutSessionCompleted = event.data.object;
+//         break;
+//       default:
+//         console.log(`Unhandled event type ${event.type}`);
+//     }
 
-  // Return a 200 response to acknowledge receipt of the event
-  response.send();
-});
+//     response.send();
+//   }
+// );
